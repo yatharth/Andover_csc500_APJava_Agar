@@ -10,11 +10,11 @@ from java.awt.event import KeyEvent
 from java.lang.reflect import Modifier
 
 
-class MaxLevelException(ValueError):
+class MaxLevelException(Exception):
     pass
 
 
-class DeadException(ValueError):
+class DeadException(Exception):
     pass
 
 
@@ -22,9 +22,9 @@ class Player(object):
     CLASS_NAME = 'p'
     MAX_LEVEL = 40.0
 
-    def __init__(self, id_, level, x, y, size):
+    def __init__(self, id_, level, x, y):
         self.id_, self._level = id_, level
-        self.x, self.y, self.size = x, y, size
+        self.x, self.y = x, y
 
     @property
     def level(self):
@@ -38,11 +38,11 @@ class Player(object):
 
     @property
     def radius(self):
-        return (self.level / self.MAX_LEVEL) * (self.size / 6.0)
+        return (self.level / self.MAX_LEVEL) * (1 / 6.0)  # TODO: match feel of online version
 
     @property
     def velocity(self):
-        return (1.0 / (math.log(self.level) + 1)) * (self.size / 200.0)
+        return (1.0 / (math.log(self.level) + 1)) * (1 / 200.0)
 
     def collides(self, other):
         return dist(self.x, self.y, other.x, other.y) <= self.radius + other.radius
@@ -61,18 +61,18 @@ class Player(object):
         self.x += velocity * math.cos(-direction)
         self.y += velocity * math.sin(-direction)
 
-        if not 0 <= self.x <= self.size:
+        if not 0 <= self.x <= 1:
             self.direction = math.pi - self.direction
-            self.x = max(min(self.x, self.size), 0)
-        if not 0 <= self.y <= self.size:
+            self.x = max(min(self.x, 1), 0)
+        if not 0 <= self.y <= 1:
             self.direction *= -1
-            self.y = max(min(self.y, self.size), 0)
+            self.y = max(min(self.y, 1), 0)
 
-    def draw(self, stroke_color=None):
+    def draw(self, conv, stroke_color=None):
         shade = self.level / self.MAX_LEVEL
         fill(color(shade, 0.75, 0.75))
         stroke(color(shade if stroke_color is None else stroke_color, 1, 1))
-        ellipse(self.x, self.y, self.radius*2, self.radius*2)
+        ellipse(conv(self.x), conv(self.y), conv(self.radius*2), conv(self.radius*2))
 
 
 class PC(Player, object):
@@ -97,8 +97,8 @@ class PC(Player, object):
         },
     }
 
-    def __init__(self, id_, level, x, y, size, label=None):
-        super(PC, self).__init__(id_, level, x, y, size)
+    def __init__(self, id_, level, x, y, label=None):
+        super(PC, self).__init__(id_, level, x, y)
         self.label = label if label is not None else self.DEFAULT_LABELS[self.id_]
 
         self.temporary_label, self.temporary_end = None, None
@@ -157,8 +157,8 @@ class PC(Player, object):
     def direction(self, value):
         pass  # TODO: avoid need
 
-    def draw(self):
-        super(PC, self).draw(stroke_color=(self.level - 1)/self.MAX_LEVEL)
+    def draw(self, conv):
+        super(PC, self).draw(conv, stroke_color=(self.level - 1)/self.MAX_LEVEL)
 
         label = self.label
         if self.temporary_label is not None:
@@ -169,14 +169,15 @@ class PC(Player, object):
 
         textSize(8)
         fill(color(0, 0, 0, 0.75))
-        text(label, self.x - 7.5, self.y + self.radius + 10)
+        textAlign(CENTER)
+        text(label, conv(self.x), conv(self.y + self.radius + 0.02))
 
 
 class NPC(Player, object):
     CLASS_NAME = 'npc'
 
-    def __init__(self, id_, level, x, y, size):
-        super(NPC, self).__init__(id_, level, x, y, size)
+    def __init__(self, id_, level, x, y):
+        super(NPC, self).__init__(id_, level, x, y)
 
         self.direction = random.random() * (2*math.pi)
 

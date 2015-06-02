@@ -8,6 +8,13 @@ import math
 from players import Player, PC, NPC, MaxLevelException, DeadException
 
 
+class WinException(Exception):
+    pass
+
+class LoseException(Exception):
+    pass
+
+
 class Board(object):
     RUNNING = 'r'
     DEAD = 'd'
@@ -35,16 +42,16 @@ class Board(object):
     def add_npc(self):
         def maker():
             level = random.randrange(1, 4) if sum(npc.level == 1 for npc in self.npcs) >= 5 else 1
-            x, y = random.random() * self.size, random.random() * self.size
-            return NPC(len(self.npcs), level, x, y, self.size)
+            x, y = random.random(), 0
+            return NPC(len(self.npcs), level, x, y)
 
         npc = self.add_c(maker)
         self.npcs.append(npc)
 
     def add_pc(self, label=None):
         def maker():
-            x = (self.size / 4.0) + (random.random()) * (self.size / 2.0)
-            return PC(len(self.pcs), 2, x, self.size / 2.0, self.size, label)
+            x = (1 / 4.0) + (random.random()) * (1 / 2.0)
+            return PC(len(self.pcs), 2, x, 0.5, label)
 
         pc = self.add_c(maker)
         self.pcs.append(pc)
@@ -110,8 +117,8 @@ class Board(object):
                 # TODO: collide reflectively
                 direction = -math.atan2(c.y - other.y, c.x - other.x)
                 for i in range(100):
-                    c.update(direction, Player(0, other.level, 0, 0, other.size).velocity)  # TODO: make more elegant
-                    other.update(direction + math.pi, Player(0, other.level, 0, 0, other.size).velocity)  # FIXME: check after direction minus change
+                    c.update(direction, Player(0, other.level, 0, 0).velocity)  # TODO: make more elegant
+                    other.update(direction + math.pi, Player(0, other.level, 0, 0).velocity)  # FIXME: check after direction minus change
 
                     if not c.collides(other):
                         break
@@ -132,10 +139,10 @@ class Board(object):
 
         if self.state == self.RUNNING:
             for c in self.cs:
-                c.draw()
+                c.draw(lambda x: x*self.size)
         else:
             if self.state == self.DEAD:
-                message = "'{}' died :(".format(self.player.label)
+                message = "'{}' died :(".format(self.player.label)  # TODO: make more elegant
             elif self.state == self.WON:
                 if self.player in self.pcs:
                     message = "'{}' won!".format(self.player.label)
