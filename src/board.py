@@ -8,7 +8,7 @@ import random
 import math
 import itertools
 
-import config
+from src import config
 from players import Character, PC, NPC
 from exceps import WonException, DeadException
 
