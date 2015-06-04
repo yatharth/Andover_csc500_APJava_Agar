@@ -46,7 +46,8 @@ It's the game of life. And death. Can you do better than randomly-floating blobs
 ...
 
 Done? Then you can mod the game! Look for the config file and tinker around.
-You'll have to rebuild from source. Download [the Python runner][py]. Then run `agar.pyde`.
+You'll have to rebuild from source. Use [the Python runner][py] in `libraries` to execute `agar.pyde`.
+If you want to export as a launcher, the easiest way to do so is to run the included `build.sh` script.
 
 P.S.: Are a coder? Then have a look at the code! It's short-ish, elegant-ish, and well-ish-documented.
 If want to help out, try implementing one of the TODO items. Just make a pull request afterwards. Or email me at <yatharth999@gmail.com> if you don't get (G)it. 

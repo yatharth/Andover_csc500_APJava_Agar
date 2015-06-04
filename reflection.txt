@@ -6,7 +6,7 @@ I designed the player first, then the board, and finally the controller. OOP pro
 
 Some bugs that took me longer to resolve than they should have were using radii for diameters, and naively converting diameters between co-ordinate systems instead of using the difference of converted points on the opposite sides of a circle.
 
-I also had to deal with some bugs in the Python Processing implementation. One of them is that it didn't export projects into launchers properly if the project was split into multiple files. That's why there's an export file for bringing together all the code. In any case, you can run the appropriate launcher in the dist(ribution) folder.
+I also had to deal with some bugs in the Python Processing implementation. One of them is that it didn't export projects into launchers properly if the project was split into multiple files. I had to write a build script to do work around the issue. In any case, you can run the appropriate launcher in the dist(ribution) folder.
 
 I consulted the Processing reference often, but did not use anyone's code.
 
