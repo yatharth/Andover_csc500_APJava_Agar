@@ -160,6 +160,7 @@ class Board(object):
 
     def draw_gridlines(self, conv):
         stroke(color(0, 0, 0.75))
+        strokeWeight(0)
         # offset = (self.size % config.NO_OF_GRIDLINES) / 2
         # for c in range(offset, self.size + offset, config.NO_OF_GRIDLINES):
         for raw_c in xrange(0, self.gridlines):
@@ -178,7 +179,7 @@ class Controller(object):
 
     def __init__(self):
         self.playing = False
-        self.replay_in = None
+        self.spectating = False
         self.toasts, self.toast_started = [], None
 
     def init(self):
@@ -200,11 +201,33 @@ class Controller(object):
         if self.playing:
             self.board.keyReleased(key, keyCode)
 
-    def toast(self, message):
-        # TODO: implement as overlays
-        print message
+    def draw_toast(self):
+        """Draw toasts as overlays"""
 
-    def draw_replay(self):
+        if self.toasts and millis() >= self.toast_started + \
+                (config.LONG_TOAST_LENGTH if len(self.toasts) == 1 else config.SHORT_TOAST_LENGTH):
+            self.toasts = self.toasts[1:]
+            self.toast_started = millis()
+
+        if self.toasts:
+            message = self.toasts[0]
+
+            fill(color(0, 0, 0.25, 0.5))
+            strokeWeight(0)
+            rect(0, config.SIZE - 60, config.SIZE, 50)
+
+            textAlign(CENTER)
+            textSize(30)
+            fill(color(0, 0, 1, 0.5))
+            text(message, config.SIZE / 2.0, config.SIZE - 25)
+
+    def toast(self, message):
+        """Add message to toaster"""
+        if not self.toasts:
+            self.toast_started = millis()
+        self.toasts.append(message)
+
+    def draw_title(self):
         textAlign(CENTER)
 
         textSize(50)
@@ -235,9 +258,8 @@ class Controller(object):
         """Draw board and handle events"""
 
         # ask to replay after giving time for the game's end to sink in
-        if self.replay_in and millis() >= self.replay_in:
-            self.replay_in = None
-            self.playing = False
+        if self.spectating and not self.toasts:
+            self.playing = self.spectating = False
 
         # draw board
         if self.playing:
@@ -245,15 +267,16 @@ class Controller(object):
                 for toast in self.board.update():
                     self.toast(toast)
             except DeadException as e:
-                self.replay_in = millis() + config.LONG_TOAST_LENGTH
-                self.toast("You lost! Maximum level reached: {}.".format(int(e.player.max_level)))
+                self.spectating = True
+                self.toast("You lost! Max level: {}.".format(int(e.player.max_level)))
             except WonException as e:
-                self.replay_in = millis() + config.LONG_TOAST_LENGTH
-                self.toast("You win! You reached level {}.".format(e.player.level))
+                self.spectating = True
+                self.toast("You win! Level {}.".format(e.player.level))
             else:
                 self.board.draw()
                 self.draw_levels()
+                self.draw_toast()
 
         # show play screen
         else:
-            self.draw_replay()
+            self.draw_title()

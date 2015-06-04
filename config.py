@@ -17,5 +17,5 @@ MIN_SMALL_NPCS = 20                     # smallest, non-moving NPCs at any time 
 MAX_NPC_INITIAL_LEVEL = 5               # max level of spawning NPCs
 
 LONG_TOAST_LENGTH = 2500                # duration of toasts normally (in milliseconds)
-SHORT_TOAST_LENGTH = 300                # duration of toasts with others queued (in milliseconds)
+SHORT_TOAST_LENGTH = 500                # duration of toasts with others queued (in milliseconds)
 MAX_PLACEMENT_TRIES = 1000              # times to try placing a character without overlap (no)
