@@ -1015,8 +1015,36 @@ body .markdown-body
   }
 }
 </style><title>README</title></head><body><article class="markdown-body"><h1 id="agar"><a name="user-content-agar" href="#agar" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Agar</h1>
-<p>Agar is a simple blob game. You can play <a href="http://agar.io/">an online version</a> which got <a href="https://www.google.com/trends/explore#q=agar">really popular</a> recently.</p>
-<p>It&rsquo;s written in <a href="https://processing.org">Processing</a> (<a href="http://py.processing.org/">a Python flavor</a>, in fact); hence the name &lsquo;Agar&rsquo;: <a href="https://en.wikipedia.org/wiki/Agar"><em>processed</em></a> algae.<br />
-This project was built by Yatharth Agarwal and inspired by Ava LaRocca&rsquo;s blob game.</p>
-<p>The game currently implements colorful blobs, simple collisions, avoiding spawning over other player, flashing berating messages on getting eaten, 8-way movement support, and multi-player with upto 3 local playable characters.<br />
-Yet to be worked on are elastic collisions, a larger grid than displayed on screen, and a smart AI.</p></article></body></html>
+<p>Welcome to Agar. Agar is a simple blob game. It&rsquo;s written in <a href="https://py.processing.org">Processing</a>, hence the name <a href="https://en.wikipedia.org/wiki/Agar"><em>processed</em> algae</a>.</p>
+<p>First, download <a href="http://py.processing.org/">the Python runner</a>. Then run <code>agar.pyde</code>.<br />
+Too impatient? You can also play <a href="http://agar.io/">an online version</a> which got <a href="https://www.google.com/trends/explore#q=agar">really popular</a> recently.</p>
+<p>You should see a nice initial screen. There is also a nice replay screen. It just happens to be the same.</p>
+<p>You are a blob. There are other blobs. You must eat those other blobs to win.</p>
+<p>Blobs are colorful. Your blob&rsquo;s ring color shows the color of the largest blob you can eat.</p>
+<p>If you hit a smaller blob, you will eat it.<br />
+You will grow based on how significant the blob was compared to you.<br />
+You can see how far you are to progressing to the next level in the top-left.</p>
+<p>If you hit an equally-size blob, you will bounce reflectively.<br />
+If you hit a larger blob, you will be eaten.</p>
+<p>If you get eaten, you will be berated. You will also shrink.<br />
+If you shrink too much, you die.<br />
+If you die, you shall spectate the entirety of the grid to reflect on your worth as a human being.</p>
+<p>If you&rsquo;re clearly the biggest fish in town, you win!<br />
+If you win, you will also get a few extra glorious seconds to enjoy your absolute power.</p>
+<p>The grid is much larger than what you can see. You will see enough.<br />
+The grid lines should help keep your sanity intact.<br />
+If there are multiple players, all will be accommodated.</p>
+<p>Oh, did you know you can play with upto 3 other players locally?<br />
+Step 1: Make 3 friends.<br />
+Step 2: ???<br />
+Step 3: Profit!</p>
+<p>All of players can move simultaneously in any of the 8 ways it makes sense to move with a 4-way keypad.</p>
+<p>There is no AI. Actually, there is an AI, but it has been disabled.<br />
+The game is hard enough as it is. You don&rsquo;t want it to be impossible.</p>
+<p>You will never spawn over another player. The game will never hang. You will get a nice error message instead.</p>
+<p>It&rsquo;s the game of life. And death. Can you do better than randomly-floating blobs?</p>
+<p>&hellip;</p>
+<p>Done? Then you can mod the game! Look for the config file and tinker around.</p>
+<p>P.S.: Are a coder? Then have a look at the code! It&rsquo;s short, elegant, and well-documented.<br />
+If want to help out, try implementing one of the TODO items. Just make a pull request afterwards. Or email me at <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#121;&#97;&#116;&#104;&#97;&#114;&#116;&#104;&#57;&#57;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#121;&#97;&#116;&#104;&#97;&#114;&#116;&#104;&#57;&#57;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a> if you don&rsquo;t get (G)it. </p>
+<p>Oh, &lsquo;me&rsquo; is Yatharth Agarwal, BTW. I credit Ava LaRocca&rsquo;s own blob game for the idea to make this clone.</p></article></body></html>

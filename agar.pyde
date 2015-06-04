@@ -2,37 +2,27 @@
 
 __author__ = 'Yatharth Agarwal <yatharth999@gmail.com>'
 
-from time import sleep
+"""Run game"""
 
-from board import Board
+import config
+from board import Controller
 
 
-SIZE = 500
-BACKGROUND_COLOR = color(255, 255, 255)
-NPCS = 10
-
-board = Board(SIZE)
-
+controller = Controller()
 
 def setup():
     print "Setting up"
-    size(SIZE, SIZE)
+    size(config.SIZE, config.SIZE)
     colorMode(HSB, 1)
 
-    for i in range(NPCS):
-        board.add_npc()
-    board.add_pc()
-    board.add_pc()
-
 def draw():
-    background(BACKGROUND_COLOR)
-    board.update()
-    board.draw()
+    background(config.BACKGROUND_COLOR)
+    controller.draw()
 
 def keyPressed():
-    board.keyPressed(key, keyCode)
+    controller.keyPressed(key, keyCode)
 
 def keyReleased():
-    board.keyReleased(key, keyCode)
+    controller.keyReleased(key, keyCode)
 
 
