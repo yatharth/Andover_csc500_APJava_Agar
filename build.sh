@@ -9,20 +9,20 @@ if [ -d "dist.platforms" ]; then
 fi 
 
 echo "Creating temporary files"
-touch src/tmp.pyde
-echo "import launcher" >> src/tmp.pyde
-echo "launcher.create()" >> src/tmp.pyde
-cat src/agar.pyde >> src/tmp.pyde 
+touch agar/tmp.pyde
+echo "import launcher" >> agar/tmp.pyde
+echo "launcher.create()" >> agar/tmp.pyde
+cat agar/agar.pyde >> agar/tmp.pyde 
 
 echo "Exporting"
-sh libraries/processing.py-0202-macosx/processing-py.sh src/tmp.pyde
+sh libraries/processing.py-0202-macosx/processing-py.sh agar/tmp.pyde
 
 echo "Moving and copying over files"
-mv src/dist.platforms .
-cp src/*.py dist.platforms/mac/Launcher.app/Contents/Runtime/
-cp src/*.py dist.platforms/win/runtime/
+mv agar/dist.platforms .
+cp agar/*.py dist.platforms/mac/Launcher.app/Contents/Runtime/
+cp agar/*.py dist.platforms/win/runtime/
 
 echo "Cleaning up"
-rm src/tmp.pyde
+rm agar/tmp.pyde
 
 echo "Done"
