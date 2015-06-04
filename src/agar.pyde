@@ -4,8 +4,8 @@ __author__ = 'Yatharth Agarwal <yatharth999@gmail.com>'
 
 """Run game"""
 
-from src import config
-from src.board import Controller
+import config
+from board import Controller
 
 
 controller = Controller()

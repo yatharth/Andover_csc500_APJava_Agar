@@ -7,7 +7,7 @@ __author__ = 'Yatharth Agarwal <yatharth999@gmail.com>'
 import math
 import random
 
-from src import config
+import config
 from keys import KEY_NAMES
 from exceps import DeadException
 
