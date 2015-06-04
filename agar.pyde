@@ -14,6 +14,8 @@ def setup():
     print "Setting up"
     size(config.SIZE, config.SIZE)
     colorMode(HSB, 1)
+    frame.setTitle("Agar")
+
 
 def draw():
     background(config.BACKGROUND_COLOR)
@@ -24,5 +26,3 @@ def keyPressed():
 
 def keyReleased():
     controller.keyReleased(key, keyCode)
-
-

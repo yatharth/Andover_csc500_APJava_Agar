@@ -254,4 +254,3 @@ class NPC(Character, object):
         #     self.direction = math.atan2(other.y - self.y, other.x - self.x)
         # else:
         #     self.direction += (random.randrange(3) - 1) * random.random() * 2 * math.pi / 32
-

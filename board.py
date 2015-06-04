@@ -257,8 +257,3 @@ class Controller(object):
         # show play screen
         else:
             self.draw_replay()
-
-
-
-
-
