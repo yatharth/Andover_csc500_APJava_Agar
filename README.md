@@ -2,7 +2,7 @@
 
 Welcome to Agar. Agar is a simple blob game. It's written in [Processing][processing], hence the name [_processed_ algae][agar].
    
-First, download [the Python runner][py]. Then run `agar.pyde`.
+Simply run the appropriate launcher in `dist.playforms`.
 Too impatient? You can also play [an online version][web] which got [really popular][trends] recently.
 
 You should see a nice initial screen. There is also a nice replay screen. It just happens to be the same.
@@ -46,8 +46,9 @@ It's the game of life. And death. Can you do better than randomly-floating blobs
 ...
 
 Done? Then you can mod the game! Look for the config file and tinker around.
+You'll have to rebuild from source. Download [the Python runner][py]. Then run `agar.pyde`.
 
-P.S.: Are a coder? Then have a look at the code! It's short, elegant, and well-documented.
+P.S.: Are a coder? Then have a look at the code! It's short-ish, elegant-ish, and well-ish-documented.
 If want to help out, try implementing one of the TODO items. Just make a pull request afterwards. Or email me at <yatharth999@gmail.com> if you don't get (G)it. 
 
 Oh, 'me' is Yatharth Agarwal, BTW. I credit Ava LaRocca's own blob game for the idea to make this clone.
